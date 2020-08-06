@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Websockets Chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form action="#" onSubmit="sendMessage()">
+      <input id="msg" autocomplete="off" /><button>Enviar</button>
+    </form>
+
+    <script>
+      var ws = new WebSocket("ws://localhost:3001");
+
+      ws.onopen = function() {
+        console.log("Conectei");
+      };
+
+      ws.onmessage = function(msg) {
+        console.log("Recebi ", msg);
+
+        var messages = document.getElementById("messages");
+        var li = document.createElement('li');
+        li.textContent = msg.data;
+
+        messages.append(li);
+      };
+
+      function sendMessage() {
+        var input = document.getElementById("msg");
+
+        var text = input.value;
+
+        input.value = '';
+
+        ws.send(text);
+
+        return false;
+      }
+
+      // error
+      // close
+    </script>
+  </body>
+</html>
