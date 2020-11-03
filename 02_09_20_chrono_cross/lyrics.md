@@ -55,7 +55,7 @@ Chrono Cross ?
      Em9       C
      Countless worlds
         G         D                C Bm C
-     In hope's to find you someday
+     In hopes to find you someday
                    Em
      Before dreams fade
 
